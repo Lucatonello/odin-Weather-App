@@ -1,5 +1,5 @@
 async function getWeatherData (place) {
-    const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=f0fb4469f000457aaba155348243105&q=${place}`)
+    const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=f0fb4469f000457aaba155348243105&q=${place}&days=3&q}`)
     const weatherData = await response.json();
     return weatherData;
 }
@@ -19,6 +19,7 @@ function convertJson(weatherData) {
     }
 
     const container = document.getElementById('data-container');
+    container.innerHTML = '';
 
     const country = document.createElement('h1');
     country.textContent = `${data.country}`;
@@ -57,7 +58,28 @@ function convertJson(weatherData) {
     container.appendChild(wind_mph);   
     container.appendChild(wind_direction);   
 
-    return data;
+    let classCounter = 0;
+
+    const forecastContainer = document.getElementById('forecast-container')
+    
+    forecastContainer.innerHTML = '';
+
+    weatherData.forecast.forecastday.forEach(day => {
+        const forecastElement = document.createElement('div');
+        const forecastClass = `forecast-${classCounter}`;
+        forecastElement.className = 'forecast-element ' + forecastClass;
+        classCounter++;
+        
+        forecastElement.innerHTML = `
+            <h3>${day.date}</h3>
+            <p>Max Temp (C): ${day.day.maxtemp_c}</p>
+            <p>Min Temp (C): ${day.day.mintemp_c}</p>
+            <p>Condition: ${day.day.condition.text}</p>
+            <p>Humidity: ${day.day.avghumidity}%</p>
+            <p>Max Wind (Kph): ${day.day.maxwind_kph}</p>
+        `;
+        forecastContainer.appendChild(forecastElement);
+    });
 }
 let button = document.getElementById('submit').addEventListener('click', () => {
     let place = document.getElementById('place').value;
