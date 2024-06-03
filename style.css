@@ -1,3 +1,69 @@
+.main-title {
+    margin: auto;
+    text-align: center;
+}
+#main-content {
+    display: flex;
+    min-width: 100vh;
+}
+#main-content > h1, #main-content > h2 {
+    text-align: center;
+    min-width: 1px;
+}
+#main-content > h1 {
+    margin: 35px 16px 0px 16px;
+    font-size: 7rem;
+    min-width: 310px;
+}
+#main-content > img {
+    margin-left: 32vw;
+    margin-top: 35px;
+    height: 150px;
+    width: 150px;
+}
+.condition {
+    position: absolute;
+    margin-top: 15px;
+    top: 260px;
+    right: 47vw;
+}
+#more-stats {
+    margin-top: 48px;
+}
+#more-stats > p {
+    margin-bottom: 5px;
+    margin-top: 9px;
+    margin-left: 16px;
+}
 .forecast-element.forecast-0 {
-    margin-left: 500px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.forecast-element.forecast-0 > h3 {
+    display: none;
+}
+.forecast-element.forecast-0 > .maxtemp {
+    position: absolute;
+    top: 290px;
+    right: 51vw;
+}
+.forecast-element.forecast-0 > .mintemp {
+    position: absolute;
+    top: 290px;
+    right: 42vw;
+}
+
+.forecast-element.forecast-0 > p:nth-last-child(-n + 3) {
+    display: none;
+}
+.forecast-element.forecast-1, .forecast-element.forecast-2, .forecast-element.forecast-3 {
+    border: 1px solid black;
+    margin: 0px 15px 0px 15px;
+    width: 200px;
+}
+#forecast-container {
+    display: flex;
+    margin-top: 200px;
+    justify-content: center;
 }

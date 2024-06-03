@@ -1,5 +1,5 @@
 async function getWeatherData (place) {
-    const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=f0fb4469f000457aaba155348243105&q=${place}&days=3&q}`)
+    const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=f0fb4469f000457aaba155348243105&q=${place}&days=4&q}`)
     const weatherData = await response.json();
     return weatherData;
 }
@@ -11,6 +11,7 @@ function convertJson(weatherData) {
         country: weatherData.location.country,
         temp_c: weatherData.current.temp_c,
         temp_f: weatherData.current.temp_f,
+        icon: `https:${weatherData.current.condition.icon}`,
         condition: weatherData.current.condition.text,
         humidity: weatherData.current.humidity,
         wind_kph: weatherData.current.wind_kph,
@@ -19,44 +20,63 @@ function convertJson(weatherData) {
     }
 
     const container = document.getElementById('data-container');
+    const mainContent = document.getElementById('main-content');
+    const conditionContainer = document.getElementById('condition');
+    const moreStats = document.getElementById('more-stats');
     container.innerHTML = '';
+    mainContent.innerHTML = '';
+    conditionContainer.innerHTML = '';
+    moreStats.innerHTML = '';
 
     const country = document.createElement('h1');
+    country.className = 'main-title';
     country.textContent = `${data.country}`;
 
     const placeName = document.createElement('h1'); 
+    placeName.className = 'main-title';
     placeName.textContent = `${data.place}`;
 
+    const icon = document.createElement('img');
+    icon.setAttribute('src', data.icon);
+    icon.setAttribute('alt', 'condition icon');
+ 
     const temp_c = document.createElement('h1');
-    temp_c.textContent = `Temperature (C): ${data.temp_c}`;
+    temp_c.textContent = `${data.temp_c} c`;
 
     const temp_f = document.createElement('h1');
-    temp_f.textContent = ` Temperature (F): ${data.temp_f}`;
+    temp_f.textContent = `${data.temp_f} f`;
 
     const condition = document.createElement('h2');
-    condition.textContent = `Condition: ${data.condition}`;
+    condition.className = 'condition';
+    condition.textContent = `${data.condition}`;
 
-    const humidity = document.createElement('h2');
+    const humidity = document.createElement('p');
     humidity.textContent = `Humidity: ${data.humidity}`;
 
-    const wind_kph = document.createElement('h2');
+    const wind_kph = document.createElement('p');
     wind_kph.textContent = `Wind kph: ${data.wind_kph}`;
 
-    const wind_mph = document.createElement('h2');
+    const wind_mph = document.createElement('p');
     wind_mph.textContent = `Wind mph: ${data.wind_mph}`;
 
-    const wind_direction = document.createElement('h2');
+    const wind_direction = document.createElement('p');
     wind_direction.textContent = `Wind direction: ${data.wind_direction}`;
 
     container.appendChild(country);  
-    container.appendChild(placeName); 
-    container.appendChild(temp_c);   
-    container.appendChild(temp_f);   
-    container.appendChild(condition);   
-    container.appendChild(humidity);   
-    container.appendChild(wind_kph);   
-    container.appendChild(wind_mph);   
-    container.appendChild(wind_direction);   
+    container.appendChild(placeName);
+
+    mainContent.appendChild(icon); 
+    mainContent.appendChild(temp_c);   
+    //mainContent.appendChild(temp_f);   
+    conditionContainer.appendChild(condition)
+    mainContent.appendChild(conditionContainer)
+    container.appendChild(mainContent);
+
+    moreStats.appendChild(humidity);   
+    moreStats.appendChild(wind_kph);   
+    //moreStats.appendChild(wind_mph);   
+    moreStats.appendChild(wind_direction);
+    mainContent.appendChild(moreStats)
 
     let classCounter = 0;
 
@@ -72,8 +92,8 @@ function convertJson(weatherData) {
         
         forecastElement.innerHTML = `
             <h3>${day.date}</h3>
-            <p>Max Temp (C): ${day.day.maxtemp_c}</p>
-            <p>Min Temp (C): ${day.day.mintemp_c}</p>
+            <p class="maxtemp">Max: ${day.day.maxtemp_c} c</p>
+            <p class="mintemp">Min: ${day.day.mintemp_c} c</p>
             <p>Condition: ${day.day.condition.text}</p>
             <p>Humidity: ${day.day.avghumidity}%</p>
             <p>Max Wind (Kph): ${day.day.maxwind_kph}</p>
