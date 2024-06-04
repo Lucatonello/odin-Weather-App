@@ -6,9 +6,11 @@
     <link rel="stylesheet" href="style.css">
     <title>Weather app</title>
 </head>
-<body>
-    <input type="text" id="place">
-    <button id="submit" type="button">search</button>
+<body onload="getLocation()">
+    <div class="input-container">
+        <input class="input" type="text" id="place" placeholder="Enter a place">
+        <button class="input" id="submit" type="button">search</button>
+    </div>
 
     <div id="data-container">
         <div id="main-content"></div>

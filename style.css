@@ -1,3 +1,27 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.input-container {
+    background: rgba(204, 204, 204, 0.4);
+    padding-bottom: 8px;
+}
+.input {
+    margin: 10px 0px 0px 15px;
+    border: 0;
+    border-radius: 5px;
+    outline: none;
+}
 .main-title {
     margin: auto;
     text-align: center;
@@ -40,30 +64,42 @@
     justify-content: center;
     margin-top: 20px;
 }
-.forecast-element.forecast-0 > h3 {
+.forecast-element.forecast-0 > h3, .forecast-element.forecast-0 > img {
     display: none;
 }
 .forecast-element.forecast-0 > .maxtemp {
     position: absolute;
     top: 290px;
     right: 51vw;
+    display: block;
 }
 .forecast-element.forecast-0 > .mintemp {
     position: absolute;
     top: 290px;
     right: 42vw;
+    display: block;
 }
 
-.forecast-element.forecast-0 > p:nth-last-child(-n + 3) {
+.forecast-element.forecast-0 > p:nth-last-child(-n + 2) {
     display: none;
 }
+.forecast-element.forecast-0 > p:nth-child(-n + 3) {
+    display: none;
+}
+
 .forecast-element.forecast-1, .forecast-element.forecast-2, .forecast-element.forecast-3 {
     border: 1px solid black;
     margin: 0px 15px 0px 15px;
     width: 200px;
 }
+#forecast-container > div > h3, #forecast-container > div > img, #forecast-container > div > p {
+    margin-left: 10px;
+}
 #forecast-container {
     display: flex;
     margin-top: 200px;
     justify-content: center;
+}
+.conditionForecast {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
